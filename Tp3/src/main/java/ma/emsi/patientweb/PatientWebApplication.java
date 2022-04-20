@@ -23,7 +23,6 @@ public class PatientWebApplication {
             patientRepository.save(new Patient(null, "Mohammed", new Date(), true, 321));
             patientRepository.save(new Patient(null, "Yassine", new Date(), false, 165));
             patientRepository.save(new Patient(null, "Hanae", new Date(), true, 132));
-
             patientRepository.findAll().forEach(p -> {
                 System.out.println(p.getNom());
             });

@@ -1,11 +1,15 @@
 package ma.emsi.patientweb;
 
+import ma.emsi.patientweb.Security.service.SecurityService;
+import ma.emsi.patientweb.Security.service.SecurityServiceImpl;
 import ma.emsi.patientweb.entities.Patient;
 import ma.emsi.patientweb.repositories.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
@@ -16,6 +20,10 @@ public class PatientWebApplication {
         SpringApplication.run(PatientWebApplication.class, args);
     }
 
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
     //@Bean
     CommandLineRunner commandLineRunner(PatientRepository patientRepository) {
         return args -> {
@@ -27,5 +35,22 @@ public class PatientWebApplication {
                 System.out.println(p.getNom());
             });
         };
+    }
+    //@Bean
+    CommandLineRunner saveUsers(SecurityService securityService){
+      return args -> {
+          securityService.saveNewUser("mohamed","1234","1234");
+          securityService.saveNewUser("yasmine","1234","1234");
+          securityService.saveNewUser("hassan","1234","1234");
+
+          securityService.saveNewRole("USER","");
+          securityService.saveNewRole("ADMIN","");
+
+          securityService.addRoleToUser("mohamed","USER");
+          securityService.addRoleToUser("mohamed","ADMIN");
+          securityService.addRoleToUser("yasmine","USER");
+          securityService.addRoleToUser("hassan","USER");
+
+      };
     }
 }

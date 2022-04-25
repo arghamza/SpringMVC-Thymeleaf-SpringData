@@ -13,7 +13,7 @@
 [TOC]
 
 #Énoncé 
-##Partie 1
+## Partie 1
 ###Afficher les Patients
 ```html
 <table class="table">

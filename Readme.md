@@ -8,9 +8,7 @@
 
 **Table of Contents**
 
-[TOCM]
 
-[TOC]
 
 # Énoncé 
 ## Partie 1
@@ -43,8 +41,11 @@
             </tbody>
         </table>
 ```
-<img src="/img/screens/en/AfficherPatient.PNG" width="200" />
+
 ### Faire la Pagination
+<div>
+<img src="/img/screens/AfficherPatient.PNG" width="200" />
+</div>
 ```java
 function test(){
 	console.log("Hello world!");

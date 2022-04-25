@@ -13,7 +13,7 @@
 # Énoncé 
 ## Partie 1
 ### Afficher les Patients
-![alt text for screen readers](/img/screens/AfficherPatient.png")
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/AfficherPatient.PNG)
 ```html
 <table class="table">
             <thead>

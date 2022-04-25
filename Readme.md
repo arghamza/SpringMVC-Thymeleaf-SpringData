@@ -3,7 +3,7 @@
 
 ![](https://s1.o7planning.com/fr/11545/images/10858756.png)
 
-![](https://img.shields.io/github/followers/arghamza?style=social) ![]](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/arghamza/SpringMVC-Thymeleaf-SpringData) ![](https://img.shields.io/github/issues-pr/arghamza/SpringMVC-Thymeleaf-SpringData) 
+![](https://img.shields.io/github/followers/arghamza?style=social) ![](https://img.shields.io/github/issues/arghamza/SpringMVC-Thymeleaf-SpringData) ![](https://img.shields.io/github/issues-pr/arghamza/SpringMVC-Thymeleaf-SpringData) 
 
 
 **Table of Contents**

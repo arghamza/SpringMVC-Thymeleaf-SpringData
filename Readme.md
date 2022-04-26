@@ -11,6 +11,18 @@
 # Énoncé 
 ## Partie 1
 ### Afficher les Patients
+### Faire la Pagination
+### Faire la Pagination
+## Partie 1
+### Afficher les Patients
+### Faire la Pagination
+### Faire la Pagination
+## Partie 1
+### Afficher les Patients
+### Faire la Pagination
+### Faire la Pagination
+## Partie 1
+### Afficher les Patients
 ![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/AfficherPatient.PNG)
 ```html
 <table class="table">

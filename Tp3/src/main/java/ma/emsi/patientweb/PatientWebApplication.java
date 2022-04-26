@@ -26,7 +26,7 @@ public class PatientWebApplication {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(MedecinRepository medecinRepository) {
         return args -> {
             medecinRepository.save(new Medecin(null, "Hassan", new Date()));

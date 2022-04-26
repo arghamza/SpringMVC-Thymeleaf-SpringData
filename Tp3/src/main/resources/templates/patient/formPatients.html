@@ -11,38 +11,41 @@
 </head>
 <body>
 <div layout:fragment="content1">
-    <div class="col-md-6 offset-3">
+    <div class="col-md-6 offset-3 mt-3 card">
+        <div class="card-header"><h2>Ajouter un Patient</h2></div>
+        <div class="card-body">
         <form method="post" th:action="@{/admin/save}">
             <div>
                 <label for="nom">
-                    Nom
+                    <strong>Nom</strong>
                 </label>
                 <input id="nom" type="text" name="nom" class="form-control" th:value="${patient.nom}">
                 <span class="text-danger" th:errors="${patient.nom}"></span>
             </div>
             <div>
                 <label>
-                    Date de naissance
+                    <strong>Date de naissance</strong>
                 </label>
                 <input type="date" name="dateNaissance" class="form-control" th:value="${patient.dateNaissance}">
                 <span th:errors="${patient.dateNaissance}"></span>
             </div>
             <div>
                 <label>
-                    Malade
+                    <strong>Score</strong>
+                </label>
+                <input type="number" name="score" class="form-control" th:value="${patient.score}">
+                <span th:errors="${patient.score}"></span>
+            </div>
+            <div class="mt-1">
+                <label>
+                    <strong>Malade: </strong>
                 </label>
                 <input type="checkbox" name="malade" th:checked="${patient.malade}">
                 <span th:errors="${patient.malade}"></span>
             </div>
-            <div>
-                <label>
-                    Score
-                </label>
-                <input type="text" name="score" class="form-control" th:value="${patient.score}">
-                <span th:errors="${patient.score}"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary mt-3">Save</button>
         </form>
+    </div>
     </div>
 </div>
 </body>

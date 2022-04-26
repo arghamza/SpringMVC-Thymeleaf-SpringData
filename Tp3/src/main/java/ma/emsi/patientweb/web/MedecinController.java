@@ -28,6 +28,7 @@ public class MedecinController {
         model.addAttribute("pages",new int[medecins.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("totalPages",medecins.getTotalPages());
         return "medecin/medecins";
     }
 

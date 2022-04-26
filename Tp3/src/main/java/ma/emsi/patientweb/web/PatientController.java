@@ -21,17 +21,32 @@ import java.util.List;
 public class PatientController {
     private PatientRepository patientRepository;
 
+    public boolean isInteger( String input ) {
+        try {
+            Integer.parseInt( input );
+            return true;
+        }
+        catch( Exception e ) {
+            return false;
+        }
+    }
+
     @GetMapping(path = "/user/index")
     public String patients(Model model,@RequestParam(name="size",defaultValue = "5")int size, @RequestParam(name="page",defaultValue = "0") int page, @RequestParam(name="keyword",defaultValue = "") String keyword){
         int score;
-        if(keyword.isEmpty())score=0;
-        else
-            score=Integer.parseInt(keyword);
-        Page<Patient> patients=patientRepository.findByNomContainsOrScore(keyword,score,PageRequest.of(page,size));
+        Page<Patient> patients ;
+        if(!keyword.equals("") && isInteger(keyword) ) {
+            score=Integer.valueOf(keyword) ;
+            System.out.println(" score :" + score + " keyword : "+keyword);
+            patients = patientRepository.findByNomOrScore(keyword , score , PageRequest.of(page , size)) ;
+        }else {
+            patients = patientRepository.findByNomContains(keyword  , PageRequest.of(page , size)) ;
+        }
         model.addAttribute("listepatients",patients.getContent());
         model.addAttribute("pages",new int[patients.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
+        model.addAttribute("totalPages",patients.getTotalPages());
         return "patient/patients";
     }
 

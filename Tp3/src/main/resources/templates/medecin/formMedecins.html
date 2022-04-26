@@ -11,24 +11,27 @@
 </head>
 <body>
 <div layout:fragment="content1">
-    <div class="col-md-6 offset-3">
-        <form method="post" th:action="@{/admin/save}">
-            <div>
-                <label for="nom">
-                    Nom
-                </label>
-                <input id="nom" type="text" name="nom" class="form-control" th:value="${medecin.nom}">
-                <span class="text-danger" th:errors="${medecin.nom}"></span>
-            </div>
-            <div>
-                <label>
-                    Date de naissance
-                </label>
-                <input type="date" name="dateNaissance" class="form-control" th:value="${medecin.dateNaissance}">
-                <span th:errors="${medecin.dateNaissance}"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+    <div class="col-md-6 offset-3 mt-3 card">
+        <div class="card-header"><h2>Ajouter un Medecin</h2></div>
+        <div class="card-body">
+            <form method="post" th:action="@{/admin/save}">
+                <div>
+                    <label for="nom">
+                        <strong>Nom</strong>
+                    </label>
+                    <input id="nom" type="text" name="nom" class="form-control" th:value="${medecin.nom}">
+                    <span class="text-danger" th:errors="${medecin.nom}"></span>
+                </div>
+                <div>
+                    <label>
+                        <strong>Date de naissance</strong>
+                    </label>
+                    <input type="date" name="dateNaissance" class="form-control" th:value="${medecin.dateNaissance}">
+                    <span th:errors="${medecin.dateNaissance}"></span>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Save</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

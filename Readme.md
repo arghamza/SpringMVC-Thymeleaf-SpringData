@@ -12,17 +12,18 @@
 ## Partie 1
 ### Afficher les Patients
 ### Faire la Pagination
-### Faire la Pagination
-## Partie 1
-### Afficher les Patients
-### Faire la Pagination
-### Faire la Pagination
-## Partie 1
-### Afficher les Patients
-### Faire la Pagination
-### Faire la Pagination
-## Partie 1
-### Afficher les Patients
+### Chercher les Patients
+### Supprimer un Patient
+## Partie 2
+### Créer une page Template basée sur Thymeleaf Layout
+### Saisir et Ajouter des Patients
+### Faire la Validation du Formulaire
+### Editer et Mettre à jour un Patient
+## Partie 3 & 4
+### Ajouter la dépendance Maven de Spring Security
+### Personnaliser la configuration de Spring Security
+### Basculer de la stratégie authentification
+### Basculer vers la stratégie UserDetailsService
 ![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/AfficherPatient.PNG)
 ```html
 <table class="table">
@@ -258,6 +259,7 @@ protected void configure(HttpSecurity http) throws Exception {
     }
 ```
 ### Basculer de la stratégie authentification
+### Basculer vers la stratégie UserDetailsService
 ```java
 auth.jdbcAuthentication()
                 .dataSource(dataSource)

@@ -2,7 +2,9 @@ package ma.emsi.patientweb;
 
 import ma.emsi.patientweb.Security.service.SecurityService;
 import ma.emsi.patientweb.Security.service.SecurityServiceImpl;
+import ma.emsi.patientweb.entities.Medecin;
 import ma.emsi.patientweb.entities.Patient;
+import ma.emsi.patientweb.repositories.MedecinRepository;
 import ma.emsi.patientweb.repositories.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,14 +26,14 @@ public class PatientWebApplication {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    //@Bean
-    CommandLineRunner commandLineRunner(PatientRepository patientRepository) {
+    @Bean
+    CommandLineRunner commandLineRunner(MedecinRepository medecinRepository) {
         return args -> {
-            patientRepository.save(new Patient(null, "Hassan", new Date(), false, 122));
-            patientRepository.save(new Patient(null, "Mohammed", new Date(), true, 321));
-            patientRepository.save(new Patient(null, "Yassine", new Date(), false, 165));
-            patientRepository.save(new Patient(null, "Hanae", new Date(), true, 132));
-            patientRepository.findAll().forEach(p -> {
+            medecinRepository.save(new Medecin(null, "Hassan", new Date()));
+            medecinRepository.save(new Medecin(null, "Mohammed", new Date()));
+            medecinRepository.save(new Medecin(null, "Yassine", new Date()));
+            medecinRepository.save(new Medecin(null, "Hanae", new Date()));
+            medecinRepository.findAll().forEach(p -> {
                 System.out.println(p.getNom());
             });
         };

@@ -32,7 +32,7 @@ public class PatientController {
         model.addAttribute("pages",new int[patients.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
-        return "patients";
+        return "patient/patients";
     }
 
     @GetMapping("/admin/delete")
@@ -56,14 +56,14 @@ public class PatientController {
     @GetMapping("/admin/formPatients")
     public  String formPatients(Model model){
         model.addAttribute("patient",new Patient());
-        return "formPatients";
+        return "patient/formPatients";
     }
 
     @PostMapping(path="/admin/save")
     public String save(Model model , @Valid Patient patient , BindingResult bindingResult  , @RequestParam(name="keyword" , defaultValue = "") String keyword , @RequestParam(name="page" , defaultValue = "0")int page )
     {
         if(bindingResult.hasErrors())
-            return "formPatients" ;
+            return "patient/formPatients" ;
 
         patientRepository.save(patient) ;
         return "redirect:/user/index?page="+page+"&keyword="+keyword ;
@@ -79,7 +79,7 @@ public class PatientController {
         model.addAttribute("page",page) ;
         model.addAttribute("keyword" , keyword ) ;
         model.addAttribute("patient" ,p) ;
-        return "editPatient" ;
+        return "patient/editPatient" ;
     }
 
 }

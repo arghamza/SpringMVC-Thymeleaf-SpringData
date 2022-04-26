@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+      layout:decorate="template1"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Medecins</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3">
+        <form method="post" th:action="@{/admin/save}">
+            <div>
+                <label for="nom">
+                    Nom
+                </label>
+                <input id="nom" type="text" name="nom" class="form-control" th:value="${medecin.nom}">
+                <span class="text-danger" th:errors="${medecin.nom}"></span>
+            </div>
+            <div>
+                <label>
+                    Date de naissance
+                </label>
+                <input type="date" name="dateNaissance" class="form-control" th:value="${medecin.dateNaissance}">
+                <span th:errors="${medecin.dateNaissance}"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

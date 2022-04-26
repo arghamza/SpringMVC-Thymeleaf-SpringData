@@ -23,7 +23,11 @@ public class PatientController {
 
     @GetMapping(path = "/user/index")
     public String patients(Model model,@RequestParam(name="size",defaultValue = "5")int size, @RequestParam(name="page",defaultValue = "0") int page, @RequestParam(name="keyword",defaultValue = "") String keyword){
-        Page<Patient> patients=patientRepository.findByNomContains(keyword,PageRequest.of(page,size));
+        int score;
+        if(keyword.isEmpty())score=0;
+        else
+            score=Integer.parseInt(keyword);
+        Page<Patient> patients=patientRepository.findByNomContainsOrScore(keyword,score,PageRequest.of(page,size));
         model.addAttribute("listepatients",patients.getContent());
         model.addAttribute("pages",new int[patients.getTotalPages()]);
         model.addAttribute("currentPage",page);

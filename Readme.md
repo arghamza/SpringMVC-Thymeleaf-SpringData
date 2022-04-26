@@ -24,6 +24,8 @@
 ### Personnaliser la configuration de Spring Security
 ### Basculer de la stratégie authentification
 ### Basculer vers la stratégie UserDetailsService
+## Partie 1
+### Afficher les Patients
 ![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/AfficherPatient.PNG)
 ```html
 <table class="table">

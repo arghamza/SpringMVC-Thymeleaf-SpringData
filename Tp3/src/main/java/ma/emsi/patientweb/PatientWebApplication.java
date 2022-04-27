@@ -26,7 +26,19 @@ public class PatientWebApplication {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-    //@Bean
+    @Bean
+    CommandLineRunner commandLineRunner1(PatientRepository patientRepository) {
+        return args -> {
+            patientRepository.save(new Patient(null, "Hassan", new Date(),true,"Homme","BE102450",115));
+            patientRepository.save(new Patient(null, "Fatima", new Date(),false,"Femme","CF485253",260));
+            patientRepository.save(new Patient(null, "Hamza", new Date(),true,"Homme","DE915915",342));
+            patientRepository.save(new Patient(null, "Farouk", new Date(),false,"Homme","DF475869",233));
+            patientRepository.findAll().forEach(p -> {
+                System.out.println(p.getNom());
+            });
+        };
+    }
+    @Bean
     CommandLineRunner commandLineRunner(MedecinRepository medecinRepository) {
         return args -> {
             medecinRepository.save(new Medecin(null, "Hassan", new Date()));

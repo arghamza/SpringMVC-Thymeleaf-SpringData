@@ -35,12 +35,16 @@ public class PatientController {
     public String patients(Model model,@RequestParam(name="size",defaultValue = "5")int size, @RequestParam(name="page",defaultValue = "0") int page, @RequestParam(name="keyword",defaultValue = "") String keyword){
         int score;
         Page<Patient> patients ;
+
         if(!keyword.equals("") && isInteger(keyword) ) {
             score=Integer.valueOf(keyword) ;
-            System.out.println(" score :" + score + " keyword : "+keyword);
-            patients = patientRepository.findByNomOrScore(keyword , score , PageRequest.of(page , size)) ;
-        }else {
-            patients = patientRepository.findByNomContains(keyword  , PageRequest.of(page , size)) ;
+            patients=patientRepository.findByScore(score,PageRequest.of(page , size));
+        }
+        else if(keyword.equals("Homme") || keyword.equals("Femme")){
+            patients=patientRepository.findByGenre(keyword,PageRequest.of(page , size));
+        }
+        else {
+            patients=patientRepository.findByNomContainsOrCINContains(keyword,keyword,PageRequest.of(page , size));
         }
         model.addAttribute("listepatients",patients.getContent());
         model.addAttribute("pages",new int[patients.getTotalPages()]);

@@ -36,6 +36,16 @@
                 <input type="number" name="score" class="form-control" th:value="${patient.score}">
                 <span th:errors="${patient.score}"></span>
             </div>
+            <div >
+                <label><strong>CIN: </strong></label>
+                <input class="form-control" type="text" name="CIN" th:value="${patient.CIN}">
+                <span  class="text-danger" th:errors="${patient.CIN}"/>
+            </div>
+            <div >
+                <label><strong>Genre: </strong></label>
+                <input class="form-control" type="text" name="Genre" th:value="${patient.genre}">
+                <span  class="text-danger" th:errors="${patient.genre}"/>
+            </div>
             <div class="mt-1">
                 <label>
                     <strong>Malade: </strong>

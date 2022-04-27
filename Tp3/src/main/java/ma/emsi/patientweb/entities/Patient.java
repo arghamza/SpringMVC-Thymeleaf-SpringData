@@ -26,6 +26,8 @@ public class Patient {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     private boolean malade;
+    private String genre;
+    private String CIN;
     @DecimalMin("100")
     private int score;
 }

@@ -7,6 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepository extends JpaRepository<Patient,Long> {
-    Page<Patient> findByNomContains(String kw, Pageable pageable);
+    Page<Patient> findByNomContainsOrCINContains(String kw, String cin,Pageable pageable);
     Page<Patient> findByNomOrScore(String keyword, int score, Pageable pageable);
+    Page<Patient> findByScore(int score, Pageable pageable);
+    Page<Patient> findByGenre(String keyword,Pageable pageable);
+    Page<Patient> findByCIN(String keyword,Pageable pageable);
 }

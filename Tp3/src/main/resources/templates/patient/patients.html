@@ -24,7 +24,7 @@
             <table class="table">
             <thead>
             <tr>
-                <th>ID</th><th>Nom</th><th>Date</th><th>Malade</th><th>Score</th>
+                <th>ID</th><th>Nom</th><th>Date</th><th>Malade</th><th>Score</th><th>CIN</th><th>Genre</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +34,8 @@
                 <td th:text="${p.dateNaissance}"></td>
                 <td th:text="${p.malade}"></td>
                 <td th:text="${p.score}"></td>
+                <td th:text="${p.CIN}"></td>
+                <td th:text="${p.genre}"></td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a onclick="return confirm('Etes vous sure')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
                         Delete

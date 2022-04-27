@@ -9,27 +9,28 @@
 </head>
 <body>
 <div layout:fragment="content1">
-    <div class="col-md-6 offset-3">
-
+    <div class="col-md-6 offset-3 card mt-3">
+        <div class="card-header"> <h1>Editer Medecin</h1></div>
+        <div class="card-body">
         <form method="post" th:action="@{/admin/medecin/save(page=${page} , keyword=${keyword})}">
             <div >
-                <label>ID</label>
+                <label><strong>ID</strong></label>
                 <input  class="form-control" type="text" name="id" th:value="${medecin.id}">
 
             </div>
             <div >
-                <label>Nom</label>
+                <label><strong>Nom</strong></label>
                 <input class="form-control" type="text" name="nom" th:value="${medecin.nom}">
                 <span  class="text-danger" th:errors="${medecin.nom}"/>
             </div>
             <div >
-                <label>Date de naissance</label>
+                <label><strong>Date de naissance</strong></label>
                 <input class="form-control" type="date" name="dateNaissance" th:value="${medecin.dateNaissance}">
                 <span class="text-danger" th:errors="${medecin.dateNaissance}"/>
             </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
         </form>
-
+        </div>
 
     </div>
 

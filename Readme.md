@@ -261,6 +261,14 @@ protected void configure(HttpSecurity http) throws Exception {
     }
 ```
 ### Basculer de la stratégie authentification
+```java
+auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username as principal,password as credentials,active from users where username=?")
+                .authoritiesByUsernameQuery("select username as principal, role as role from users_roles where username=?")
+                .rolePrefix("ROLE_")
+                .passwordEncoder(passwordEncoder);
+```
 ### Basculer vers la stratégie UserDetailsService
 ```java
 auth.jdbcAuthentication()
@@ -298,9 +306,141 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 ```java
 auth.userDetailsService(userDetailsService);
 ```
+## Amélioration
+### Recherche multi-critère
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/Search.PNG)
+```java
+if(!keyword.equals("") && isInteger(keyword) ) {
+            score=Integer.valueOf(keyword) ;
+            patients=patientRepository.findByScore(score,PageRequest.of(page , size));
+        }
+        else if(keyword.equals("Homme") || keyword.equals("Femme")){
+            patients=patientRepository.findByGenre(keyword,PageRequest.of(page , size));
+        }
+        else {
+            patients=patientRepository.findByNomContainsOrCINContains(keyword,keyword,PageRequest.of(page , size));
+        }
+```
 
+### Ajout de entity médecin
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/medecin.PNG)
+```java
+public String medecins(Model model,@RequestParam(name="size",defaultValue = "5")int size, @RequestParam(name="page",defaultValue = "0") int page, @RequestParam(name="keyword",defaultValue = "") String keyword){
+        Page<Medecin> medecins=medecinRepository.findByNomContains(keyword,PageRequest.of(page,size));
+        model.addAttribute("listemedecins",medecins.getContent());
+        model.addAttribute("pages",new int[medecins.getTotalPages()]);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("totalPages",medecins.getTotalPages());
+        return "medecin/medecins";
+    }
+```
+#### edit
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/edit_medecin.PNG)
+```html
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3 card mt-3">
+        <div class="card-header"> <h1>Editer Medecin</h1></div>
+        <div class="card-body">
+        <form method="post" th:action="@{/admin/medecin/save(page=${page} , keyword=${keyword})}">
+            <div >
+                <label><strong>ID</strong></label>
+                <input  class="form-control" type="text" name="id" th:value="${medecin.id}">
+
+            </div>
+            <div >
+                <label><strong>Nom</strong></label>
+                <input class="form-control" type="text" name="nom" th:value="${medecin.nom}">
+                <span  class="text-danger" th:errors="${medecin.nom}"/>
+            </div>
+            <div >
+                <label><strong>Specialite</strong></label>
+                <input class="form-control" type="text" name="specialite" th:value="${medecin.specialite}">
+                <span  class="text-danger" th:errors="${medecin.specialite}"/>
+            </div>
+            <div >
+                <label><strong>Date de naissance</strong></label>
+                <input class="form-control" type="date" name="dateNaissance" th:value="${medecin.dateNaissance}">
+                <span class="text-danger" th:errors="${medecin.dateNaissance}"/>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+        </form>
+        </div>
+    </div>
+</div>
+```
+### Ajout de entity rendez-vous
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/RDV.PNG)
+```java
+ @GetMapping(path = "/user/rendezVous/index")
+    public String rendezVous(Model model,@RequestParam(name="size",defaultValue = "5")int size, @RequestParam(name="page",defaultValue = "0") int page, @RequestParam(name="keyword",defaultValue = "") String keyword){
+        Page<RendezVous> rendezVous=rendezVousRepository.findAll(PageRequest.of(page,size));
+        model.addAttribute("listerendezVous",rendezVous.getContent());
+        model.addAttribute("pages",new int[rendezVous.getTotalPages()]);
+        model.addAttribute("currentPage",page);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("totalPages",rendezVous.getTotalPages());
+        return "rendezvous/RendezVous";
+    }
+```
+```html
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header">Liste rendezVous</div>
+        <div class="card-body">
+            <form method="get" th:action="@{/user/index}">
+                <label>Key word</label>
+                <input type="text" name="keyword" th:value="${keyword}">
+                <button type="submit" class="btn btn-primary">Chercher</button>
+            </form>
+            <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th><th>Patient</th><th>Medecin</th><th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p:${listerendezVous}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.patient.nom}"></td>
+                <td th:text="${p.medecin.nom}"></td>
+                <td th:text="${p.dateRDV}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a onclick="return confirm('Etes vous sure')" class="btn btn-danger" th:href="@{/admin/rendezVous/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                        Delete
+                    </a>
+                </td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a class="btn btn-success" th:href="@{/admin/editRendezVous(id=${p.id},keyword=${keyword},page=${currentPage})}">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+            <ul class="nav nav-pills pagination">
+                <a class="page-link" th:href="@{/user/rendezVous/index(page=(${currentPage}-1!=-1?${currentPage}-1:0),keyword=${keyword})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <li class="page-item">
+                    <a class="btn btn-primary ms-2 "
+                       th:text="${currentPage}"
+                    ></a>
+                </li>
+                <a class="page-link ms-2" th:href="@{/user/rendezVous/index(page=(${currentPage}==${totalPages}-1?${currentPage}:${currentPage}+1),keyword=${keyword})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+```
+#### Amelioration de l'interface
+![](https://github.com/arghamza/SpringMVC-Thymeleaf-SpringData/blob/master/Tp3/img/screens/UI.PNG)
 ----
 
 
 
-###End
+### End

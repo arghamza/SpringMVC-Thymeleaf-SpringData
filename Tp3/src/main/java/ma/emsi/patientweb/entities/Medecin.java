@@ -25,4 +25,5 @@ public class Medecin {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
+    private String specialite;
 }

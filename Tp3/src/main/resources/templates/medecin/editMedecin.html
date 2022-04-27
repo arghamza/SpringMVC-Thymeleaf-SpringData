@@ -24,6 +24,11 @@
                 <span  class="text-danger" th:errors="${medecin.nom}"/>
             </div>
             <div >
+                <label><strong>Specialite</strong></label>
+                <input class="form-control" type="text" name="specialite" th:value="${medecin.specialite}">
+                <span  class="text-danger" th:errors="${medecin.specialite}"/>
+            </div>
+            <div >
                 <label><strong>Date de naissance</strong></label>
                 <input class="form-control" type="date" name="dateNaissance" th:value="${medecin.dateNaissance}">
                 <span class="text-danger" th:errors="${medecin.dateNaissance}"/>

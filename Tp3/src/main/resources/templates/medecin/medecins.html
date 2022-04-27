@@ -24,13 +24,14 @@
             <table class="table">
             <thead>
             <tr>
-                <th>ID</th><th>Nom</th><th>Date</th>
+                <th>ID</th><th>Nom</th><th>Specialite</th><th>Date</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="p:${listemedecins}">
                 <td th:text="${p.id}"></td>
                 <td th:text="${p.nom}"></td>
+                <td th:text="${p.specialite}"></td>
                 <td th:text="${p.dateNaissance}"></td>
                 <td sec:authorize="hasAuthority('ADMIN')">
                     <a onclick="return confirm('Etes vous sure')" class="btn btn-danger" th:href="@{/admin/medecin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">

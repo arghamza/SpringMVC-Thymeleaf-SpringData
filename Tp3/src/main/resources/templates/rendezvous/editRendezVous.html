@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+    <meta charset="UTF-8">
+    <title>Form rendezVous</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.0.1/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3 card mt-3">
+        <div class="card-header"> <h1>Editer rendezVous</h1></div>
+        <div class="card-body">
+        <form method="post" th:action="@{/admin/rendezVous/save(page=${page} , keyword=${keyword})}">
+            <div >
+                <label><strong>ID</strong></label>
+                <input  class="form-control" type="text" name="id" id="id" th:value="${rendezVous.id}">
+
+            </div>
+            <div>
+                <label>
+                    <strong>patient</strong>
+                </label>
+                <input id="patient" type="text" name="patient" class="form-control" th:value="${rendezVous.patient.id}">
+                <span class="text-danger" th:errors="${rendezVous.patient.id}"></span>
+            </div>
+            <div>
+                <label>
+                    <strong>medecin</strong>
+                </label>
+                <input id="medecin" type="text" name="medecin" class="form-control" th:value="${rendezVous.medecin.id}">
+                <span class="text-danger" th:errors="${rendezVous.medecin.id}"></span>
+            </div>
+            <div>
+                <label><strong>Date de rendez vous</strong></label>
+                <input class="form-control" type="date" name="dateRDV" id="dateRDV" th:value="${rendezVous.dateRDV}">
+                <span class="text-danger" th:errors="${rendezVous.dateRDV}"/>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+        </form>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

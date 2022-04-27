@@ -24,7 +24,7 @@
                     <li><a class="dropdown-item" th:href="@{/user/index}">Chercher</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     Medecin
                 </a>
@@ -32,6 +32,15 @@
                 <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/formMedecins}">Nouveau Medecin</a></li>
                 <li><a class="dropdown-item" th:href="@{/user/medecin/index}">Chercher Medecin</a></li>
             </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Rendez Vous
+                </a>
+                <ul class="dropdown-menu ms-5">
+                    <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/admin/formRendezVous}">Nouveau Rendez-Vous</a></li>
+                    <li><a class="dropdown-item" th:href="@{/user/rendezVous/index}">Chercher Rendez-Vous</a></li>
+                </ul>
             </li>
         </ul>
         <!--Code of ARGANE HAMZA-->

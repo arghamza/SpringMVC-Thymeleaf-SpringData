@@ -363,7 +363,7 @@ public String medecins(Model model,@RequestParam(name="size",defaultValue = "5")
                 <input class="form-control" type="date" name="dateNaissance" th:value="${medecin.dateNaissance}">
                 <span class="text-danger" th:errors="${medecin.dateNaissance}"/>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Enregistrer</button>
+            <button type="submit" class="btn btn-primary mt-3">Enregistrer </button>
         </form>
         </div>
     </div>
